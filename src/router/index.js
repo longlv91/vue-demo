@@ -1,7 +1,10 @@
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 import AnalyticsDashboard from '../pages/dashboard/AnalyticsDashboard';
 import NotFound from '../pages/404/NotFound';
 import Login from '../pages/login/Login';
 
+Vue.use(VueRouter);
 const routes = [
     {
         path: '/dashboard', component: AnalyticsDashboard,
@@ -21,4 +24,9 @@ const routes = [
     { path: '*', redirect: '/dashboard' }
 ];
 
-export default routes;
+
+const router = new VueRouter({
+  routes
+});
+
+export default router;

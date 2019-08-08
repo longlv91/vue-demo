@@ -14,7 +14,6 @@ import Layout from './components/Layout';
     Layout
   }
 })
-// eslint-disable-next-line
 export default class App extends Vue {
 }
 </script>

@@ -1,17 +1,14 @@
 import Vue from 'vue';
 import App from './App.vue';
 import Antd from 'ant-design-vue';
-import VueRouter from 'vue-router';
 import 'ant-design-vue/dist/antd.css';
-import routes from './router';
+import router from './router';
 import i18n from './translations';
+import VueRx from 'vue-rx';
 
 Vue.config.productionTip = false;
+Vue.use(VueRx);
 Vue.use(Antd);
-Vue.use(VueRouter);
-const router = new VueRouter({
-  routes
-});
 
 new Vue({
   i18n,
