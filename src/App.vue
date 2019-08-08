@@ -1,28 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Layout/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Vue from "vue";
+import Component from "vue-class-component";
+import Layout from './components/Layout';
 
-export default {
-  name: 'app',
+@Component({
   components: {
-    HelloWorld
+    Layout
   }
+})
+// eslint-disable-next-line
+export default class App extends Vue {
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#components-layout-demo-fixed-sider .logo {
+  height: 32px;
+  background: rgba(255,255,255,.2);
+  margin: 16px;
 }
 </style>
