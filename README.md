@@ -25,5 +25,10 @@ npm run test
 npm run lint
 ```
 
+### Screenshot application
+
+<p align="center"><img src="./screenshot.PNG" width="700"></p>
+
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
