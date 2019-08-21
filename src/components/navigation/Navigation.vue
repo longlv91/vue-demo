@@ -1,9 +1,5 @@
 <template>
-  <a-layout-sider
-      :trigger="null"
-      collapsible
-      v-model="collapsed"
-    >
+  <a-layout-sider  class="sider-bar" :trigger="null" collapsible v-model="collapsed">
     <div class="logo"></div>
     <perfect-scrollbar>
       <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']">
@@ -15,8 +11,15 @@
             </router-link>
           </a-menu-item>
           <a-sub-menu v-if="menu.hasChild" :key="'sub' + index">
-            <span slot="title"><a-icon :type="menu.icon" /><span>{{menu.label}}</span></span>
-            <a-menu-item v-for="(submenu, i) in menu.children" :key="'sub' + index + '-' + i">{{submenu.label}}</a-menu-item>
+            <span slot="title">
+              <a-icon :type="menu.icon" />
+              <span>{{menu.label}}</span>
+            </span>
+            <a-menu-item v-for="(submenu, i) in menu.children" :key="'sub' + index + '-' + i">
+              <router-link :to="submenu.routerLink">
+                <span class="nav-text">{{submenu.label}}</span>
+              </router-link>
+            </a-menu-item>
           </a-sub-menu>
         </template>
       </a-menu>
@@ -27,7 +30,7 @@
 <script>
 import Vue from "vue";
 import Component from "vue-class-component";
-import axios from 'axios';
+import axios from "axios";
 
 @Component({
   components: {},
@@ -38,17 +41,18 @@ import axios from 'axios';
 export default class Navigation extends Vue {
   menus = [];
 
-  created () {
-    axios.get('http://localhost:3333/api/menus')
-        .then(response => {
-            this.menus = response.data;
-        })
-        .catch((error) => {
-            this.menus = [];
-        })
-        .finally(function () {
-            console.log('Done call API');
-        });
+  created() {
+    axios
+      .get("http://localhost:3333/api/menus")
+      .then(response => {
+        this.menus = response.data;
+      })
+      .catch(error => {
+        this.menus = [];
+      })
+      .finally(function() {
+        console.log("Done call API");
+      });
   }
 }
 </script>
@@ -56,10 +60,10 @@ export default class Navigation extends Vue {
 <style>
 .logo {
   height: 32px;
-  background: rgba(255,255,255,.2);
+  background: rgba(255, 255, 255, 0.2);
   margin: 16px;
 }
-.ps {
+.sider-bar .ps {
   height: calc(100vh - 64px);
 }
 </style>

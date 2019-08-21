@@ -1,8 +1,10 @@
 <template>
-  <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
+  <a-layout-content class="main-content" :style="{ margin: '24px 16px', padding: '24px 0', background: '#fff', minHeight: '280px' }">
+    <perfect-scrollbar>
     <div :style="{ padding: '24px', background: '#fff'}">
       <router-view></router-view>
     </div>
+    </perfect-scrollbar>
   </a-layout-content>
 </template>
 
@@ -16,3 +18,9 @@ import Component from "vue-class-component";
 export default class Content extends Vue {
 }
 </script>
+
+<style>
+.main-content > .ps {
+  height: calc(100vh - 229px);
+}
+</style>
