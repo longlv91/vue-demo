@@ -1,29 +1,65 @@
 <template>
-  <a-layout-sider :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }">
+  <a-layout-sider
+      :trigger="null"
+      collapsible
+      v-model="collapsed"
+    >
     <div class="logo"></div>
-    <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']">
-      <a-menu-item key="1">
-        <router-link to="/dashboard">
-          <a-icon type="user" />
-          <span class="nav-text">{{ $t("navigation.dashboard") }}</span>
-        </router-link>
-      </a-menu-item>
-      <a-menu-item key="2">
-        <router-link to="/404">
-          <a-icon type="video-camera" />
-          <span class="nav-text">{{ $t("navigation.notFound") }}</span>
-        </router-link>
-      </a-menu-item>
-    </a-menu>
+    <perfect-scrollbar>
+      <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']">
+        <template v-for="(menu, index) in menus">
+          <a-menu-item v-if="!menu.hasChild" :key="index">
+            <router-link :to="menu.routerLink">
+              <a-icon :type="menu.icon" />
+              <span class="nav-text">{{menu.label}}</span>
+            </router-link>
+          </a-menu-item>
+          <a-sub-menu v-if="menu.hasChild" :key="'sub' + index">
+            <span slot="title"><a-icon :type="menu.icon" /><span>{{menu.label}}</span></span>
+            <a-menu-item v-for="(submenu, i) in menu.children" :key="'sub' + index + '-' + i">{{submenu.label}}</a-menu-item>
+          </a-sub-menu>
+        </template>
+      </a-menu>
+    </perfect-scrollbar>
   </a-layout-sider>
 </template>
 
 <script>
 import Vue from "vue";
 import Component from "vue-class-component";
+import axios from 'axios';
 
 @Component({
-  components: {}
+  components: {},
+  props: {
+    collapsed: Boolean
+  }
 })
-export default class Navigation extends Vue {}
+export default class Navigation extends Vue {
+  menus = [];
+
+  created () {
+    axios.get('http://localhost:3333/api/menus')
+        .then(response => {
+            this.menus = response.data;
+        })
+        .catch((error) => {
+            this.menus = [];
+        })
+        .finally(function () {
+            console.log('Done call API');
+        });
+  }
+}
 </script>
+
+<style>
+.logo {
+  height: 32px;
+  background: rgba(255,255,255,.2);
+  margin: 16px;
+}
+.ps {
+  height: calc(100vh - 64px);
+}
+</style>

@@ -1,8 +1,8 @@
 <template>
-  <a-layout id="components-layout-demo-fixed-sider">
-    <Navigation />
-    <a-layout :style="{ marginLeft: '200px' }">
-      <Header />
+  <a-layout id="components-layout-demo-custom-trigger">
+    <Navigation :collapsed="collapsed"/>
+    <a-layout>
+      <Header :collapsed="collapsed" :actionTrigger="toggle"/>
       <Content />
       <Footer />
     </a-layout>
@@ -25,5 +25,10 @@ import Footer from "./footer/Footer";
     Footer
   }
 })
-export default class Layout extends Vue {}
+export default class Layout extends Vue {
+  collapsed = false;
+  toggle() {
+    this.collapsed = !this.collapsed;
+  }
+}
 </script>
