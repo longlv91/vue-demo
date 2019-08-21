@@ -19,11 +19,13 @@ import Component from "vue-class-component";
     actionTrigger: Function
   }
 })
-export default class Header extends Vue {
+class Header extends Vue {
   onClick() {
     this.actionTrigger();
   }
 }
+
+export default Header;
 </script>
 
 <style>

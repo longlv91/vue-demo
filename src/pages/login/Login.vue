@@ -52,7 +52,7 @@ import Component from "vue-class-component";
 @Component({
   components: {}
 })
-export default class Login extends Vue {
+class Login extends Vue {
   beforeCreate() {
     this.form = this.$form.createForm(this);
   }
@@ -65,6 +65,8 @@ export default class Login extends Vue {
     });
   }
 }
+
+export default Login;
 </script>
 <style>
 #components-form-demo-normal-login .login-form {

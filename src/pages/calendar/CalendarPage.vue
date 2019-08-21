@@ -21,7 +21,7 @@ import Component from "vue-class-component";
 @Component({
   components: {}
 })
-export default class CalendarPage extends Vue {
+class CalendarPage extends Vue {
   getListData(value) {
     let listData;
     switch (value.date()) {
@@ -59,6 +59,8 @@ export default class CalendarPage extends Vue {
     }
   }
 }
+
+export default CalendarPage;
 </script>
 
 <style scoped>

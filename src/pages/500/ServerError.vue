@@ -9,6 +9,8 @@ import Component from "vue-class-component";
 @Component({
   components: {}
 })
-export default class ServerError extends Vue {
+class ServerError extends Vue {
 }
+
+export default ServerError;
 </script>

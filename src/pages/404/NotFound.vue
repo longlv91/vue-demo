@@ -9,6 +9,8 @@ import Component from "vue-class-component";
 @Component({
   components: {}
 })
-export default class NotFound extends Vue {
+class NotFound extends Vue {
 }
+
+export default NotFound;
 </script>

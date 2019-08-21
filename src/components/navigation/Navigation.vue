@@ -38,7 +38,7 @@ import axios from "axios";
     collapsed: Boolean
   }
 })
-export default class Navigation extends Vue {
+class Navigation extends Vue {
   menus = [];
 
   created() {
@@ -49,12 +49,15 @@ export default class Navigation extends Vue {
       })
       .catch(error => {
         this.menus = [];
+        console.log(error);
       })
       .finally(function() {
         console.log("Done call API");
       });
   }
 }
+
+export default Navigation;
 </script>
 
 <style>

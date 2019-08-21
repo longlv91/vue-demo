@@ -14,8 +14,10 @@ import Layout from './components/Layout';
     Layout
   }
 })
-export default class App extends Vue {
+class App extends Vue {
 }
+
+export default App;
 </script>
 
 <style>

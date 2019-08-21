@@ -9,6 +9,8 @@ import Component from "vue-class-component";
 @Component({
   components: {}
 })
-export default class AnalyticsDashboard extends Vue {
+class AnalyticsDashboard extends Vue {
 }
+
+export default AnalyticsDashboard;
 </script>

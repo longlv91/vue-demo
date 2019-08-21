@@ -25,10 +25,12 @@ import Footer from "./footer/Footer";
     Footer
   }
 })
-export default class Layout extends Vue {
+class Layout extends Vue {
   collapsed = false;
   toggle() {
     this.collapsed = !this.collapsed;
   }
 }
+
+export default Layout;
 </script>

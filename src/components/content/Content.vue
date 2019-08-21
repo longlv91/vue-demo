@@ -15,8 +15,10 @@ import Component from "vue-class-component";
 @Component({
   components: {}
 })
-export default class Content extends Vue {
+class Content extends Vue {
 }
+
+export default Content;
 </script>
 
 <style>
