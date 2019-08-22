@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 import AnalyticsDashboard from '../pages/dashboard/AnalyticsDashboard';
 import NotFound from '../pages/404/NotFound';
 import Login from '../pages/login/Login';
+import Register from '../pages/register/Register';
+import ChangeLog from '../pages/changelog/ChangeLog';
 import CalendarPage from '../pages/calendar/CalendarPage';
 
 Vue.use(VueRouter);
@@ -18,6 +20,10 @@ const routes = [{
         component: Login
     },
     {
+        path: '/pages/authentication/register',
+        component: Register
+    },
+    {
         path: '*',
         redirect: '/apps/dashboards/analytics'
     },
@@ -28,6 +34,10 @@ const routes = [{
     {
         path: '/pages/error/not-found',
         component: NotFound
+    },
+    {
+        path: '/docs/changelog',
+        component: ChangeLog
     },
     {
         path: '**',

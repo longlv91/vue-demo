@@ -68,14 +68,16 @@ class Login extends Vue {
 
 export default Login;
 </script>
+
 <style>
-#components-form-demo-normal-login .login-form {
+.login-form {
   max-width: 300px;
+  margin: 0 auto;
 }
-#components-form-demo-normal-login .login-form-forgot {
+.login-form-forgot {
   float: right;
 }
-#components-form-demo-normal-login .login-form-button {
+.login-form-button {
   width: 100%;
 }
 </style>
