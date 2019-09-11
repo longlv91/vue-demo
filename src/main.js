@@ -7,11 +7,15 @@ import 'ant-design-vue/dist/antd.css';
 import router from './router';
 import i18n from './translations';
 import VueRx from 'vue-rx';
+import VueApexCharts from 'vue-apexcharts';
+
 
 Vue.config.productionTip = false;
 Vue.use(VueRx);
 Vue.use(Antd);
 Vue.use(PerfectScrollbar);
+Vue.use(VueApexCharts);
+Vue.component('apexchart', VueApexCharts);
 
 new Vue({
   i18n,
