@@ -1,12 +1,12 @@
 <template>
-  <a-layout id="components-layout-demo-custom-trigger">
-    <Navigation :collapsed="collapsed"/>
+<a-layout id="components-layout-demo-custom-trigger">
+    <Navigation v-show="isLoggedIn" :collapsed="collapsed" />
     <a-layout>
-      <Header :collapsed="collapsed" :actionTrigger="toggle"/>
-      <Content />
-      <Footer />
+        <Header v-show="isLoggedIn" :collapsed="collapsed" :actionTrigger="toggle" />
+        <Content />
+        <Footer v-show="isLoggedIn" />
     </a-layout>
-  </a-layout>
+</a-layout>
 </template>
 
 <script>
@@ -18,18 +18,30 @@ import Content from "./content/Content";
 import Footer from "./footer/Footer";
 
 @Component({
-  components: {
-    Navigation,
-    Header,
-    Content,
-    Footer
-  }
+    components: {
+        Navigation,
+        Header,
+        Content,
+        Footer
+    }
 })
 class Layout extends Vue {
-  collapsed = false;
-  toggle() {
-    this.collapsed = !this.collapsed;
-  }
+    isLoggedIn = false;
+    collapsed = false;
+
+    beforeCreate() {
+        this.isLoggedIn = this.$store.state.auth.loggedIn;
+        this.$store.subscribe(config => {
+          if (config.type === "auth/setLoggedIn") {
+            this.isLoggedIn = config.payload;
+          }
+        })
+    }
+
+    toggle() {
+        this.collapsed = !this.collapsed;
+    }
+
 }
 
 export default Layout;
