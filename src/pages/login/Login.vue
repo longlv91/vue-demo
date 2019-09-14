@@ -1,5 +1,6 @@
 <template>
 <a-form id="components-form-demo-normal-login" :form="form" class="login-form" @submit="handleSubmit">
+    <img alt="Vue logo" width="300" src="../../assets/images/vue.png" />
     <a-form-item>
         <a-input v-decorator="[
           'userName',
@@ -75,7 +76,7 @@ export default Login;
     max-width: 300px;
     margin: 0 auto;
     position: fixed;
-    top: calc(50% - 133.5px);
+    top: calc(50% - 300px);
     left: calc(50% - 150px);
 }
 

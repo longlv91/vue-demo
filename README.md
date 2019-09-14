@@ -33,7 +33,13 @@ npm run lint
 
 ### Screenshot application
 
-<p align="center"><img src="./screenshot.PNG" width="700"></p>
+#### Login Page
+
+<p align="center"><img src="./src/assets/screenshot/loginpage.PNG" width="700"></p>
+
+#### Home Page
+
+<p align="center"><img src="./src/assets/screenshot/homepage.PNG" width="700"></p>
 
 
 ### Customize configuration
