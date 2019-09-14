@@ -14,7 +14,7 @@ const getters = {
 
 // actions
 const actions = {
-    updateStateUser ({ commit, state }, user) {
+    updateStateUser ({ commit }, user) {
         commit("setLoggedIn", user ? true : false);
     }
 }
