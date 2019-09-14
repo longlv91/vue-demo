@@ -53,7 +53,7 @@ class Login extends Vue {
             if (!err) {
                 // console.log("Received values of form: ", values);
                 authenticationService.login(values.userName, values.password).then(success => {
-                  this.$store.dispatch('auth/updateStateUser', success);
+                    this.$store.dispatch('auth/updateStateUser', success);
                     let redirectPath = '/apps/dashboards/analytics';
                     if (this.$route && this.$route.query && this.$route.query.redirect) {
                         redirectPath = this.$route.query.redirect;
@@ -74,6 +74,9 @@ export default Login;
 .login-form {
     max-width: 300px;
     margin: 0 auto;
+    position: fixed;
+    top: calc(50% - 133.5px);
+    left: calc(50% - 150px);
 }
 
 .login-form-forgot {

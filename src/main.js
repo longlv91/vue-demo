@@ -4,6 +4,7 @@ import Antd from 'ant-design-vue';
 import PerfectScrollbar from 'vue2-perfect-scrollbar';
 import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css';
 import 'ant-design-vue/dist/antd.css';
+import './assets/css/main.scss';
 import router from './router';
 import store from './store';
 import i18n from './translations';

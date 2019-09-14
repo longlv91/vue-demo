@@ -1,7 +1,9 @@
 import {
     BehaviorSubject
 } from 'rxjs';
-import { AES } from 'crypto-js';
+import {
+    AES
+} from 'crypto-js';
 import {
     requestOptions,
     requestAPI
@@ -20,6 +22,9 @@ export const authenticationService = {
         return currentUserSubject.value
     },
     get isAuthorized() {
+        if (currentUserSubject.value && !document.body.classList.contains("authorized")) {
+            document.body.classList.add("authorized");
+        }
         return currentUserSubject.value ? true : false;
     }
 };
@@ -33,6 +38,7 @@ function login(username, password) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('currentUser', JSON.stringify(user));
             currentUserSubject.next(user);
+            addClass();
             return user;
         });
 }
@@ -41,4 +47,23 @@ function logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     currentUserSubject.next(null);
+    removeClass();
+}
+
+function addClass() {
+    if (document.body.classList.contains("un-authorized")) {
+        document.body.classList.remove("un-authorized");
+    }
+    if (!document.body.classList.contains("authorized")) {
+        document.body.classList.add("authorized");
+    }
+}
+
+function removeClass() {
+    if (!document.body.classList.contains("un-authorized")) {
+        document.body.classList.add("un-authorized");
+    }
+    if (document.body.classList.contains("authorized")) {
+        document.body.classList.remove("authorized");
+    }
 }

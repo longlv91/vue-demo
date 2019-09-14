@@ -1,7 +1,7 @@
 <template>
-  <a-layout-content class="main-content" :style="{ margin: '24px 16px', padding: '24px 0', background: '#fff', minHeight: '280px' }">
+  <a-layout-content class="main-content">
     <perfect-scrollbar>
-    <div :style="{ padding: '24px', background: '#fff'}">
+    <div class="router-content">
       <router-view></router-view>
     </div>
     </perfect-scrollbar>

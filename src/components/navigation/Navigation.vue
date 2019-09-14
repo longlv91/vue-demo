@@ -30,7 +30,7 @@
 <script>
 import Vue from "vue";
 import Component from "vue-class-component";
-import axios from "axios";
+import { dataService } from "../../services";
 
 @Component({
   components: {},
@@ -42,18 +42,9 @@ class Navigation extends Vue {
   menus = [];
 
   created() {
-    axios
-      .get("http://localhost:3333/api/menus")
-      .then(response => {
-        this.menus = response.data;
-      })
-      .catch(error => {
-        this.menus = [];
-        console.log(error);
-      })
-      .finally(function() {
-        console.log("Done call API");
-      });
+    dataService.getMenus().then(response => {
+      this.menus = response;
+    })
   }
 }
 

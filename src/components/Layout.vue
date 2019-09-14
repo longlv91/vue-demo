@@ -1,10 +1,10 @@
 <template>
-<a-layout id="components-layout-demo-custom-trigger">
-    <Navigation v-show="isLoggedIn" :collapsed="collapsed" :key="keyId"/>
+<a-layout id="vue-page">
+    <Navigation v-show="isLoggedIn" :collapsed="collapsed" :key="updateKey('nav')"/>
     <a-layout>
-        <Header v-show="isLoggedIn" :key="keyId" :collapsed="collapsed" :actionTrigger="toggle" />
+        <Header v-show="isLoggedIn" :key="updateKey('header')" :collapsed="collapsed" :actionTrigger="toggle" />
         <Content />
-        <Footer v-show="isLoggedIn" :key="keyId" />
+        <Footer v-show="isLoggedIn" :key="updateKey('footer')" />
     </a-layout>
 </a-layout>
 </template>
@@ -36,7 +36,7 @@ class Layout extends Vue {
         this.$store.subscribe(config => {
             if (config.type === "auth/setLoggedIn") {
                 this.isLoggedIn = this.$store.getters["auth/isLoggedIn"];
-                this.updateKey();
+                this.keyId++;
             }
         })
     }
@@ -45,8 +45,8 @@ class Layout extends Vue {
         this.collapsed = !this.collapsed;
     }
 
-    updateKey() {
-      this.keyId++;
+    updateKey(ele) {
+      return ele + "-" + this.keyId;
     }
 
 }
