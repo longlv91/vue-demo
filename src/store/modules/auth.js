@@ -1,11 +1,16 @@
+import { authenticationService } from "../../services";
 
 // initial state
 const state = {
-    loggedIn: false
+    loggedIn: authenticationService.isAuthorized
 };
 
 // getters
-const getters = {};
+const getters = {
+    isLoggedIn(state) {
+        return state.loggedIn;
+    }
+};
 
 // actions
 const actions = {
@@ -17,7 +22,6 @@ const actions = {
 // mutations
 const mutations = {
     setLoggedIn(state, value) {
-debugger;
         state.loggedIn = value;
     }
 }

@@ -44,6 +44,8 @@ import {
 class Login extends Vue {
     beforeCreate() {
         this.form = this.$form.createForm(this);
+        authenticationService.logout();
+        this.$store.dispatch('auth/updateStateUser', false);
     }
     handleSubmit(e) {
         e.preventDefault();

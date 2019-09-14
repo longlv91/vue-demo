@@ -1,10 +1,10 @@
 <template>
 <a-layout id="components-layout-demo-custom-trigger">
-    <Navigation v-show="isLoggedIn" :collapsed="collapsed" />
+    <Navigation v-show="isLoggedIn" :collapsed="collapsed" :key="keyId"/>
     <a-layout>
-        <Header v-show="isLoggedIn" :collapsed="collapsed" :actionTrigger="toggle" />
+        <Header v-show="isLoggedIn" :key="keyId" :collapsed="collapsed" :actionTrigger="toggle" />
         <Content />
-        <Footer v-show="isLoggedIn" />
+        <Footer v-show="isLoggedIn" :key="keyId" />
     </a-layout>
 </a-layout>
 </template>
@@ -16,6 +16,7 @@ import Navigation from "./navigation/Navigation";
 import Header from "./header/Header";
 import Content from "./content/Content";
 import Footer from "./footer/Footer";
+import { debuglog } from "util";
 
 @Component({
     components: {
@@ -26,20 +27,26 @@ import Footer from "./footer/Footer";
     }
 })
 class Layout extends Vue {
-    isLoggedIn = false;
+    isLoggedIn;
+    keyId = 0;
     collapsed = false;
 
     beforeCreate() {
-        this.isLoggedIn = this.$store.state.auth.loggedIn;
+        this.isLoggedIn = this.$store.getters["auth/isLoggedIn"];
         this.$store.subscribe(config => {
-          if (config.type === "auth/setLoggedIn") {
-            this.isLoggedIn = config.payload;
-          }
+            if (config.type === "auth/setLoggedIn") {
+                this.isLoggedIn = this.$store.getters["auth/isLoggedIn"];
+                this.updateKey();
+            }
         })
     }
 
     toggle() {
         this.collapsed = !this.collapsed;
+    }
+
+    updateKey() {
+      this.keyId++;
     }
 
 }
