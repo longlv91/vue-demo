@@ -1,6 +1,6 @@
 <template>
 <div class="error-page">
-    <img alt="403" src="../../assets/images/error/404.jpg" />
+    <img alt="403" src="../../assets/images/error/403.jpg" />
     <a-row>
         <router-link :to="'/'">
             <a-button type="primary">Back to home</a-button>
@@ -16,9 +16,9 @@ import Component from "vue-class-component";
 @Component({
     components: {}
 })
-class NotFound extends Vue {}
+class Unauthorized extends Vue {}
 
-export default NotFound;
+export default Unauthorized;
 </script>
 
 <style lang="scss">

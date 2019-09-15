@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import AnalyticsDashboard from '../pages/dashboard/AnalyticsDashboard';
+import Unauthorized from '../pages/403/Unauthorized';
 import NotFound from '../pages/404/NotFound';
 import ServerError from '../pages/500/ServerError';
 import Login from '../pages/login/Login';
@@ -46,7 +47,13 @@ const routes = [{
     },
     {
         path: '/',
-        redirect: '/pages/authentication/login'
+        beforeEnter: (to, from, next) => {
+            if (authenticationService.isAuthorized) {
+                next('/apps/dashboards/analytics');
+            } else {
+                next('/pages/authentication/login');
+            }
+        }
     },
     {
         path: '/apps/calendar',
@@ -54,6 +61,13 @@ const routes = [{
         meta: {
             title: 'Calendar Page',
             requiresAuth: true
+        }
+    },
+    {
+        path: '/pages/error/unauthorized-error',
+        component: Unauthorized,
+        meta: {
+            title: '403 - Unauthorized'
         }
     },
     {
