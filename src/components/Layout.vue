@@ -1,6 +1,6 @@
 <template>
 <a-layout id="vue-page">
-    <Navigation v-show="isLoggedIn" :collapsed="collapsed" :key="updateKey('nav')"/>
+    <Navigation v-show="isLoggedIn" :isLoggedIn="isLoggedIn" :collapsed="collapsed" :key="updateKey('nav')"/>
     <a-layout>
         <Header v-show="isLoggedIn" :key="updateKey('header')" :collapsed="collapsed" :actionTrigger="toggle" />
         <Content />

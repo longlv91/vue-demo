@@ -42,16 +42,19 @@ import {
 @Component({
     components: {},
     props: {
-        collapsed: Boolean
+        collapsed: Boolean,
+        isLoggedIn: Boolean
     }
 })
 class Navigation extends Vue {
     menus = [];
 
     created() {
-        dataService.getMenus().then(response => {
-            this.menus = response;
-        })
+        if (this.isLoggedIn) {
+            dataService.getMenus().then(response => {
+                this.menus = response;
+            })
+        }
     }
 }
 
