@@ -5,6 +5,7 @@ import {
 import {
     authenticationService
 } from "../services";
+import router from '../router';
 
 // Set config defaults when creating the instance
 const instance = axios.create({
@@ -47,7 +48,10 @@ instance.interceptors.response.use(function (response) {
         if ([401, 403].indexOf(error.response.status) !== -1) {
             // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
             authenticationService.logout();
-            location.reload(true);
+            // location.reload(true);
+            router.push({
+                path: "/pages/authentication/login"
+            })
         }
     } else if (error.request) {
         // The request was made but no response was received

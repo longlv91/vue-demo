@@ -4,6 +4,7 @@ import AnalyticsDashboard from '../pages/dashboard/AnalyticsDashboard';
 import Unauthorized from '../pages/403/Unauthorized';
 import NotFound from '../pages/404/NotFound';
 import ServerError from '../pages/500/ServerError';
+import LockScreen from '../pages/lock-screen/LockScreen';
 import Login from '../pages/login/Login';
 import Register from '../pages/register/Register';
 import ChangeLog from '../pages/changelog/ChangeLog';
@@ -11,7 +12,18 @@ import CalendarPage from '../pages/calendar/CalendarPage';
 import { authenticationService } from '../services';
 
 Vue.use(VueRouter);
-const routes = [{
+const routes = [
+    {
+        path: '/',
+        beforeEnter: (to, from, next) => {
+            if (authenticationService.isAuthorized) {
+                next('/apps/dashboards/analytics');
+            } else {
+                next('/pages/authentication/login');
+            }
+        }
+    },
+    {
         path: '/apps/dashboards/analytics',
         component: AnalyticsDashboard,
         meta: {
@@ -46,13 +58,10 @@ const routes = [{
         }
     },
     {
-        path: '/',
-        beforeEnter: (to, from, next) => {
-            if (authenticationService.isAuthorized) {
-                next('/apps/dashboards/analytics');
-            } else {
-                next('/pages/authentication/login');
-            }
+        path: '/pages/authentication/lock-screen',
+        component: LockScreen,
+        meta: {
+            title: 'Lock Screen Page'
         }
     },
     {
