@@ -2,13 +2,17 @@ import { authenticationService } from "../../services";
 
 // initial state
 const state = {
-    loggedIn: authenticationService.isAuthorized
+    loggedIn: authenticationService.isAuthorized,
+    lockScreen: false
 };
 
 // getters
 const getters = {
     isLoggedIn(state) {
         return state.loggedIn;
+    },
+    isLockScreen(state) {
+        return state.lockScreen;
     }
 };
 
@@ -16,6 +20,11 @@ const getters = {
 const actions = {
     updateStateUser ({ commit }, user) {
         commit("setLoggedIn", user ? true : false);
+    },
+    updateLockApp({commit, state}, value) {
+        if (state.loggedIn) {
+            commit("setLockScreen", value);
+        }
     }
 }
 
@@ -23,6 +32,9 @@ const actions = {
 const mutations = {
     setLoggedIn(state, value) {
         state.loggedIn = value;
+    },
+    setLockScreen(state, value) {
+        state.lockScreen = value;
     }
 }
 

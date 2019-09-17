@@ -1,5 +1,5 @@
 <template>
-<a-form id="components-form-demo-normal-login" :form="form" class="login-form" @submit="handleSubmit">
+<a-form id="login" :form="form" class="login-form" @submit="handleSubmit">
     <img alt="Vue logo" width="300" src="../../assets/images/vue.png" />
     <a-form-item>
         <a-input v-decorator="[
@@ -71,7 +71,7 @@ class Login extends Vue {
 export default Login;
 </script>
 
-<style>
+<style scoped>
 .login-form {
     max-width: 300px;
     margin: 0 auto;

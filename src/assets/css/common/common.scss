@@ -1,4 +1,4 @@
-.un-authorized {
+.un-authorized, .lock-screen {
     background-image: url("../images/gradient_background.svg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -7,7 +7,7 @@
     }
 }
 
-.authorized .main-content {
+.authorized:not(.lock-screen) .main-content {
     margin: 24px 16px;
     padding: 24px 0;
     background: #fff;

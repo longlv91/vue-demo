@@ -1,10 +1,10 @@
 <template>
 <a-layout id="vue-page">
-    <Navigation v-show="isLoggedIn" :isLoggedIn="isLoggedIn" :collapsed="collapsed" :key="updateKey('nav')"/>
+    <Navigation v-show="isShow" :isLoggedIn="isShow" :collapsed="collapsed" :key="updateKey('nav')"/>
     <a-layout>
-        <Header v-show="isLoggedIn" :key="updateKey('header')" :collapsed="collapsed" :actionTrigger="toggle" />
+        <Header v-show="isShow" :key="updateKey('header')" :collapsed="collapsed" :actionTrigger="toggle" />
         <Content />
-        <Footer v-show="isLoggedIn" :key="updateKey('footer')" />
+        <Footer v-show="isShow" :key="updateKey('footer')" />
     </a-layout>
 </a-layout>
 </template>
@@ -26,15 +26,20 @@ import Footer from "./footer/Footer";
     }
 })
 class Layout extends Vue {
-    isLoggedIn;
+    isShow;
     keyId = 0;
     collapsed = false;
 
     beforeCreate() {
-        this.isLoggedIn = this.$store.getters["auth/isLoggedIn"];
+        this.isShow = this.$store.getters["auth/isLoggedIn"] && !this.$store.getters["auth/isLockScreen"];
         this.$store.subscribe(config => {
+            let isLockScreen =  !this.$store.getters["auth/isLockScreen"];
             if (config.type === "auth/setLoggedIn") {
-                this.isLoggedIn = this.$store.getters["auth/isLoggedIn"];
+                this.isShow = this.$store.getters["auth/isLoggedIn"] && isLockScreen;
+                this.keyId++;
+            }
+            if (config.type === "auth/setLockScreen") {
+                this.isShow = this.$store.getters["auth/isLoggedIn"] && isLockScreen;
                 this.keyId++;
             }
         })

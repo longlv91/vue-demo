@@ -2,7 +2,7 @@ import {
     BehaviorSubject
 } from 'rxjs';
 import {
-    AES
+    AES, enc
 } from 'crypto-js';
 import {
     requestOptions,
@@ -16,6 +16,8 @@ const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('
 
 export const authenticationService = {
     login,
+    encryptPassword,
+    deEncryptedPassword,
     logout,
     currentUser: currentUserSubject.asObservable(),
     get currentUserValue() {
@@ -32,7 +34,7 @@ export const authenticationService = {
 function login(username, password) {
     return requestAPI.request(requestOptions.post(`/api/login`, {
             username,
-            password: AES.encrypt(password, environment.encrypt_key).toString()
+            password: encryptPassword(password)
         }))
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -41,6 +43,15 @@ function login(username, password) {
             addClass();
             return user;
         });
+}
+
+function encryptPassword(password) {
+    return AES.encrypt(password, environment.encrypt_key).toString()
+}
+
+function deEncryptedPassword(password) {
+    const bytes = AES.decrypt(password, environment.encrypt_key);
+    return bytes.toString(enc.Utf8);
 }
 
 function logout() {
