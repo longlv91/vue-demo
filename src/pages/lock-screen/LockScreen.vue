@@ -1,13 +1,7 @@
 <template>
 <a-form id="lock-screen" :form="form" class="lock-form" @submit="handleSubmit">
     <a-form-item>
-        <a-input v-show="false" v-decorator="[
-          'userName',
-          { rules: [{ required: true, message: 'Please input your username!' }] }
-        ]" placeholder="Username">
-            <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
-        </a-input>
-        <a-avatar :size="128" src="https://avatars1.githubusercontent.com/u/7886175?s=460&v=4" />
+        <a-avatar :size="96" src="https://avatars1.githubusercontent.com/u/7886175?s=460&v=4" />
         <h3>{{currentUser.username}}</h3>
     </a-form-item>
     <a-form-item>
@@ -55,7 +49,7 @@ class LockScreen extends Vue {
             if (!err) {
                 // console.log("Received values of form: ", values);
                 let password = authenticationService.deEncryptedPassword(this.currentUser.password);
-                if (this.currentUser.username === values.userName && values.password === password) {
+                if (values.password === password) {
                     this.$router.back();
                 }
             }
@@ -83,6 +77,9 @@ export default LockScreen;
     text-align: center;
     h3 {
         color: #fff;
+    }
+    .ant-form-item {
+        margin-bottom: 10px;
     }
 }
 </style>
